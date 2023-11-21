@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #e2e0dc;
+    height: 100vh;
+}
+
+.background-head {
+    background-color: #00a884;
+    height: 127px;
+}
+
+.tableau {
+    background-color: blue;
+    height: calc(100vh - 38px);
+    max-width: 1600px;
+    top: 19px;
+    right: 19px;
+    left: 19px;
+}
