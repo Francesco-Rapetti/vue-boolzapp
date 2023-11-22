@@ -20,7 +20,7 @@ createApp({
                             status: 'sent'
                         },
                         {
-                            date: '10/01/2020 16:15:22',
+                            date: '24/11/2023 00:15:22',
                             message: 'Tutto fatto!',
                             status: 'received'
                         }
@@ -42,7 +42,7 @@ createApp({
                             status: 'received'
                         },
                         {
-                            date: '20/03/2020 16:35:00',
+                            date: '23/11/2023 16:35:00',
                             message: 'Mi piacerebbe ma devo andare a fare la spesa.',
                             status: 'sent'
                         }
@@ -64,7 +64,7 @@ createApp({
                             status: 'sent'
                         },
                         {
-                            date: '28/03/2020 16:15:22',
+                            date: '22/11/2023 16:15:22',
                             message: 'Ah scusa!',
                             status: 'received'
                         }
@@ -76,12 +76,12 @@ createApp({
                     visible: true,
                     messages: [
                         {
-                            date: '10/01/2020 15:30:55',
+                            date: '10/01/2023 15:30:55',
                             message: 'Lo sai che ha aperto una nuova pizzeria?',
                             status: 'sent'
                         },
                         {
-                            date: '10/01/2020 15:50:00',
+                            date: '10/11/2023 15:50:00',
                             message: 'Si, ma preferirei andare al cinema',
                             status: 'received'
                         }
@@ -171,7 +171,59 @@ createApp({
     },
 
     methods: {
+    /**
+     * Returns the day of the week corresponding to a given date.
+     * If the date is within the last 7 days, it returns the name of the day.
+     * Otherwise, it returns the date itself.
+     *
+     * @param {string} date - The date in string format (dd/mm/yyyy).
+     * @returns {string} - The day of the week or the date itself.
+     */
+    contactDate(date) {
+    // Extract the date portion from the input string
+    const messageDate = date.substr(0, 10);
+    const currentDate = new Date();
 
+    // Check if the date is within the last 7 days
+    if (
+        parseInt(messageDate.substr(6, 4)) === parseInt(currentDate.getFullYear()) &&
+        parseInt(messageDate.substr(3, 2)) === parseInt(currentDate.getMonth() + 1) &&
+        parseInt(messageDate.substr(0, 2)) - parseInt(currentDate.getDate()) <= 7
+    ) {
+        // Calculate the difference between the message date and the current date
+        const dayDifference = parseInt(messageDate.substr(0, 2)) - parseInt(currentDate.getDate());
+
+        // Return the name of the day based on the day difference
+        switch (dayDifference) {
+            case 0:
+                // If the day difference is 0, it means the date is today
+                return "Oggi";
+            case 1:
+                // If the day difference is 1, it means the date is tomorrow
+                return "Ieri";
+            default:
+                // Return the name of the day based on the message date
+                switch (new Date(`${messageDate.substr(6, 4)}/${messageDate.substr(3, 2)}/${messageDate.substr(0, 2)}`).getDay()) {
+                    case 1: return "Lunedì";
+                    case 2: return "Martedì";
+                    case 3: return "Mercoledì";
+                    case 4: return "Giovedì";
+                    case 5: return "Venerdì";
+                    case 6: return "Sabato";
+                    case 7: return "Domenica";
+                    default:
+                        // If the day of the week is not recognized, return nothing
+                        break;
+                }
+        }
+    }
+
+    // Print the message date for debugging purposes
+    // console.log(messageDate);
+
+    // Return the date itself if it's not within the last 7 days
+    return messageDate;
+}
     },
 
     mounted() {
