@@ -15,9 +15,13 @@
     <div id="app">
         <div class="background-head w-100"></div>
         <div id="tableau" class="position-absolute m-auto d-flex">
+
             <div id="side-menu">
+
                 <div class="header"></div>
+
                 <div id="search-container"></div>
+
                 <div v-if="notificationAlert" id="notification" class="d-flex align-items-center p-3">
                     <div id="notification-icon" class="me-3">
                         <i class="fa-regular fa-bell-slash fs-4"></i>
@@ -29,6 +33,29 @@
                     </div>
                     <i class="fa-solid fa-xmark text-white fs-4 ms-3 cursor-pointer" @click="notificationAlert = false"></i>
                 </div>
+
+                <div id="contacts">
+                    <div class="contact-row d-flex align-items-center">
+                        <div class="select d-flex align-items-center w-100 pe-3">
+                            <img class="avatar mx-3" src="img/avatar_1.jpg" alt="avatar">
+
+                            <div class="w-100">
+                                <div class="d-flex justify-content-between align-items-center w-100">
+                                    <p class="fs-5">Michele</p>
+                                    <p class="text-lighter fs-12">10:30</p>
+                                </div>
+    
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="text-lighter">ultimo messaggio</p>
+                                    <i class="fa-solid fa-angle-down text-lighter"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-end"><hr></div>
+                </div>
+                
             </div>
 
             <div id="chat">

@@ -5,11 +5,13 @@
     font-size: 14.2px;
 }
 
+.fs-12 { font-size: 12px; }
 .fs-16 { font-size: 16px; }
 .cursor-pointer { cursor: pointer; }
+.text-lighter { color: #667781!important; }
 
 body {
-    background-color: #e2e0dc;
+    background-color: #dbdddd!important;
     height: 100vh;
 }
 
@@ -32,7 +34,7 @@ body {
     max-width: 480px;
     min-width: 30%;
     height: 100%;
-    background-color: pink;
+    background-color: white;
 }
 
 #chat {
@@ -87,6 +89,50 @@ body {
 
 .fa-chevron-right {
     font-size: 12px;
+}
+
+.contact-row {
+    height: 72px;
+    width: 100%;
+    background-color: white;
+    cursor: pointer;
+}
+
+.contact-row:hover .fa-angle-down {
+    opacity: 1;
+    right: 0;
+}
+
+.fa-angle-down {
+    opacity: 0;
+    transition: all 0.25s;
+    position: relative;
+    right: -5px;
+}
+
+.select {
+    background-color: #f5f6f6;
+    height: 100%;
+    border-radius: 16px;
+}
+
+.img-container {
+    /* overflow: hidden; */
+    width: 50px!important;
+}
+
+img.avatar {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+hr {
+    width: calc(100% - 84px);
+    margin: 0!important;
+    /* border-top: 4px!important; */
+    color: #bababa!important;
+    margin-right: 8px!important;
 }
 
 p { margin: 0!important; }
