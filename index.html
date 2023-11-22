@@ -17,8 +17,17 @@
         <div id="tableau" class="position-absolute m-auto d-flex">
             <div id="side-menu">
                 <div class="header"></div>
-                <div id="search-container">
-                    
+                <div id="search-container"></div>
+                <div v-if="notificationAlert" id="notification" class="d-flex align-items-center p-3">
+                    <div id="notification-icon" class="me-3">
+                        <i class="fa-regular fa-bell-slash fs-4"></i>
+                    </div>
+                    <div>
+                        <p class="fs-16">Attiva notifiche</p>
+                        <p>Ricevi notifiche relative ai nuovi messaggi sul computer.</p>
+                        <a href="#" @click="notificationAlert = false">Attiva notifiche desktop <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                    <i class="fa-solid fa-xmark text-white fs-4 ms-3 cursor-pointer" @click="notificationAlert = false"></i>
                 </div>
             </div>
 
