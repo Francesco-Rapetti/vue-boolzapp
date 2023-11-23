@@ -304,6 +304,15 @@ input:focus {
     right: 0;
 }
 
+.bubble .wrapper {
+    height: 34px!important;
+    width: 34px!important;
+    overflow: hidden;
+    position: absolute!important;
+    left: -30px!important;
+    top: -5px!important;
+}
+
 /* Styling for the angle down icon */
 .fa-angle-down {
     opacity: 0;

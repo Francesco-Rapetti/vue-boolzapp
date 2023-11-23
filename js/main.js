@@ -376,6 +376,16 @@ createApp({
         },
 
         /**
+         * Deletes a message from the given array of messages at the specified index.
+         * 
+         * @param {Array} messages - The array of messages.
+         * @param {number} index - The index of the message to delete.
+         */
+        deleteMessage(messages, index) {
+            messages.splice(index, 1);
+        },
+
+        /**
          * Set the height of the side content based on the presence of a notification alert.
          */
         setSideContentHeight() {
