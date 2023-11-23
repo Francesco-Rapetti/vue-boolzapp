@@ -11,6 +11,7 @@ createApp({
                     select: false,
                     id: 1000,
                     isWriting: false,
+                    inputText: '',
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -36,6 +37,7 @@ createApp({
                     select: false,
                     id: 1001,
                     isWriting: false,
+                    inputText: '',
                     messages: [
                         {
                             date: '20/03/2020 16:30:00',
@@ -66,6 +68,7 @@ createApp({
                     select: false,
                     id: 1002,
                     isWriting: false,
+                    inputText: '',
                     messages: [
                         {
                             date: '28/03/2020 10:10:40',
@@ -91,6 +94,7 @@ createApp({
                     select: false,
                     id: 1003,
                     isWriting: false,
+                    inputText: '',
                     messages: [
                         {
                             date: '10/01/2023 15:30:55',
@@ -111,6 +115,7 @@ createApp({
                     select: false,
                     id: 1004,
                     isWriting: false,
+                    inputText: '',
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -131,6 +136,7 @@ createApp({
                     select: false,
                     id: 1005,
                     isWriting: false,
+                    inputText: '',
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -156,6 +162,7 @@ createApp({
                     select: false,
                     id: 1006,
                     isWriting: false,
+                    inputText: '',
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -176,6 +183,7 @@ createApp({
                     select: false,
                     id: 1007,
                     isWriting: false,
+                    inputText: 'asdasdasd',
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -300,6 +308,71 @@ createApp({
                 return true;
             }
             return false;
+        },
+
+        /**
+         * Sends a message to a contact.
+         *
+         * @param {string} id - The ID of the contact.
+         */
+        sendMessage(id) {
+            // Find the contact with the given ID
+            const contact = this.contacts.filter(contact => contact.id == id)[0];
+
+            // Check if the contact has any input text
+            if (contact.inputText != "") {
+                // Get the current date and format it
+                const currentDate = new Date().toLocaleString();
+                const formattedCurrentDate = currentDate.substring(0, 10) + currentDate.substring(11, 20);
+
+                // Add the message to the contact's messages array
+                contact.messages.push({
+                    date: formattedCurrentDate,
+                    message: contact.inputText,
+                    status: "sent"
+                });
+
+                // Clear the input text
+                contact.inputText = "";
+
+                // Set a timeout to send an automatic reply after 1 second
+                const myTimeout = setTimeout(() => {
+                    this.automaticReplyMessage(id);
+                }, 1000);
+            }
+        },
+
+        /**
+         * Replies to a message automatically.
+         * 
+         * @param {string} id - The id of the contact.
+         */
+        async automaticReplyMessage(id) {
+            // Delay function to simulate a delay
+            const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+            
+            // Find the contact with the given id
+            const contact = this.contacts.filter(contact => contact.id == id)[0];
+            
+            // Get the current date and format it
+            const currentDate = new Date().toLocaleString();
+            const formattedCurrentDate = currentDate.substring(0, 10) + currentDate.substring(11, 20);
+
+            // Set contact isWriting status to true
+            contact.isWriting = true;
+
+            // Wait for 3 seconds
+            await delay(3000);
+
+            // Push a new message to the contact's messages array
+            contact.messages.push({
+                date: formattedCurrentDate,
+                message: "Ok",
+                status: "received"
+            });
+
+            // Set contact isWriting status to false
+            contact.isWriting = false;
         },
 
         /**
