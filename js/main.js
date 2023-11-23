@@ -8,6 +8,7 @@ createApp({
                     name: 'Michele',
                     avatar: './img/avatar_1.jpg',
                     visible: true,
+                    select: false,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -30,6 +31,7 @@ createApp({
                     name: 'Fabio',
                     avatar: './img/avatar_2.jpg',
                     visible: true,
+                    select: false,
                     messages: [
                         {
                             date: '20/03/2020 16:30:00',
@@ -52,6 +54,7 @@ createApp({
                     name: 'Samuele',
                     avatar: './img/avatar_3.jpg',
                     visible: true,
+                    select: false,
                     messages: [
                         {
                             date: '28/03/2020 10:10:40',
@@ -74,6 +77,7 @@ createApp({
                     name: 'Alessandro B.',
                     avatar: './img/avatar_4.jpg',
                     visible: true,
+                    select: false,
                     messages: [
                         {
                             date: '10/01/2023 15:30:55',
@@ -91,6 +95,7 @@ createApp({
                     name: 'Alessandro L.',
                     avatar: './img/avatar_5.jpg',
                     visible: true,
+                    select: false,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -108,6 +113,7 @@ createApp({
                     name: 'Claudia',
                     avatar: './img/avatar_6.jpg',
                     visible: true,
+                    select: false,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -130,6 +136,7 @@ createApp({
                     name: 'Federico',
                     avatar: './img/avatar_7.jpg',
                     visible: true,
+                    select: false,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -147,6 +154,7 @@ createApp({
                     name: 'Davide',
                     avatar: './img/avatar_8.jpg',
                     visible: true,
+                    select: false,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -171,62 +179,98 @@ createApp({
     },
 
     methods: {
-    /**
-     * Returns the day of the week corresponding to a given date.
-     * If the date is within the last 7 days, it returns the name of the day.
-     * Otherwise, it returns the date itself.
-     *
-     * @param {string} date - The date in string format (dd/mm/yyyy).
-     * @returns {string} - The day of the week or the date itself.
-     */
-    contactDate(date) {
-    // Extract the date portion from the input string
-    const messageDate = date.substr(0, 10);
-    const currentDate = new Date();
+        /**
+         * Returns the day of the week corresponding to a given date.
+         * If the date is within the last 7 days, it returns the name of the day.
+         * Otherwise, it returns the date itself.
+         *
+         * @param {string} date - The date in string format (dd/mm/yyyy).
+         * @returns {string} - The day of the week or the date itself.
+         */
+        contactDate(date) {
+            // Extract the date portion from the input string
+            const messageDate = date.substr(0, 10);
+            const currentDate = new Date();
 
-    // Check if the date is within the last 7 days
-    if (
-        parseInt(messageDate.substr(6, 4)) === parseInt(currentDate.getFullYear()) &&
-        parseInt(messageDate.substr(3, 2)) === parseInt(currentDate.getMonth() + 1) &&
-        parseInt(messageDate.substr(0, 2)) - parseInt(currentDate.getDate()) <= 7
-    ) {
-        // Calculate the difference between the message date and the current date
-        const dayDifference = parseInt(messageDate.substr(0, 2)) - parseInt(currentDate.getDate());
+            // Check if the date is within the last 7 days
+            if (
+                parseInt(messageDate.substr(6, 4)) === parseInt(currentDate.getFullYear()) &&
+                parseInt(messageDate.substr(3, 2)) === parseInt(currentDate.getMonth() + 1) &&
+                parseInt(messageDate.substr(0, 2)) - parseInt(currentDate.getDate()) <= 7
+            ) {
+                // Calculate the difference between the message date and the current date
+                const dayDifference = parseInt(messageDate.substr(0, 2)) - parseInt(currentDate.getDate());
 
-        // Return the name of the day based on the day difference
-        switch (dayDifference) {
-            case 0:
-                // If the day difference is 0, it means the date is today
-                return "Oggi";
-            case 1:
-                // If the day difference is 1, it means the date is tomorrow
-                return "Ieri";
-            default:
-                // Return the name of the day based on the message date
-                switch (new Date(`${messageDate.substr(6, 4)}/${messageDate.substr(3, 2)}/${messageDate.substr(0, 2)}`).getDay()) {
-                    case 1: return "Lunedì";
-                    case 2: return "Martedì";
-                    case 3: return "Mercoledì";
-                    case 4: return "Giovedì";
-                    case 5: return "Venerdì";
-                    case 6: return "Sabato";
-                    case 7: return "Domenica";
+                // Return the name of the day based on the day difference
+                switch (dayDifference) {
+                    case 0:
+                        // If the day difference is 0, it means the date is today
+                        return "Oggi";
+                    case 1:
+                        // If the day difference is 1, it means the date is tomorrow
+                        return "Ieri";
                     default:
-                        // If the day of the week is not recognized, return nothing
-                        break;
+                        // Return the name of the day based on the message date
+                        switch (new Date(`${messageDate.substr(6, 4)}/${messageDate.substr(3, 2)}/${messageDate.substr(0, 2)}`).getDay()) {
+                            case 1: return "Lunedì";
+                            case 2: return "Martedì";
+                            case 3: return "Mercoledì";
+                            case 4: return "Giovedì";
+                            case 5: return "Venerdì";
+                            case 6: return "Sabato";
+                            case 7: return "Domenica";
+                            default:
+                                // If the day of the week is not recognized, return nothing
+                                break;
+                        }
                 }
+            }
+        
+
+            // Print the message date for debugging purposes
+            // console.log(messageDate);
+
+            // Return the date itself if it's not within the last 7 days
+            return messageDate;
+        },
+
+        hoverContact(contact) {
+            contact.select = !contact.select;
+        },
+
+        /**
+         * Set the height of the side content based on the presence of a notification alert.
+         */
+        setSideContentHeight() {
+            // Check if there is a notification alert
+            if (this.notificationAlert) {
+                // Get the contacts element and the notification alert element
+                const contacts = document.querySelector('#contacts');
+                const notificationAlert = document.querySelector('#notification');
+
+                // Get the height of the notification alert
+                const notificationRect = notificationAlert.getBoundingClientRect();
+
+                // Calculate the new height of the contacts element
+                const newHeight = `calc(100% - ${notificationRect.height}px - 59px - 49px)`;
+                contacts.style.height = newHeight;
+            } else {
+                // Get the contacts element
+                const contacts = document.querySelector('#contacts');
+
+                // Calculate the new height of the contacts element
+                const newHeight = `calc(100% - 59px - 49px)`;
+                contacts.style.height = newHeight;
+            }
+        }
+    },
+    
+    mounted() {
+        if (this.notificationAlert) {
+            // Set the height of the side content based on notification div height change (overkill workaround, try to find easyer solution)
+            const resizeObserver = new ResizeObserver(() => this.setSideContentHeight());
+            resizeObserver.observe(document.getElementById('notification'));
         }
     }
-
-    // Print the message date for debugging purposes
-    // console.log(messageDate);
-
-    // Return the date itself if it's not within the last 7 days
-    return messageDate;
-}
-    },
-
-    mounted() {
-    
-    }
 }).mount('#app');
+

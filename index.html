@@ -12,15 +12,16 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
+    <!-- TODO darkmode -->
     <div id="app">
         <div class="background-head w-100"></div>
-        <div id="tableau" class="position-absolute m-auto d-flex">
+        <div id="tableau" class="position-absolute m-auto d-flex overflow-hidden">
 
             <div id="side-menu">
 
-                <div class="header"></div>
+                <div class="header"></div> <!-- TODO icons -->
 
-                <div id="search-container"></div>
+                <div id="search-container"></div> <!-- TODO search bar -->
 
                 <div v-if="notificationAlert" id="notification" class="d-flex align-items-center p-3">
                     <div id="notification-icon" class="me-3">
@@ -33,11 +34,11 @@
                     </div>
                     <i class="fa-solid fa-xmark text-white fs-4 ms-3 cursor-pointer" @click="notificationAlert = false"></i>
                 </div>
-
-                <div id="contacts">
-                    <div v-for="contact in contacts">
-                        <div class="contact-row d-flex align-items-center">
-                            <div class=" d-flex align-items-center w-100 pe-3"> <!-- select class missing -->
+    
+                <div id="contacts" class="overflow-auto">
+                    <div v-for="contact in contacts" v-show="contact.visible">
+                        <div class="contact-row d-flex align-items-center" @mouseenter="hoverContact(contact)" @mouseleave="hoverContact(contact)">
+                            <div :class="{select: contact.select}" class="d-flex align-items-center w-100 pe-3"> <!-- TODO focus contact -->
                                 <img class="avatar mx-3" :src="contact.avatar" :alt="contact.name+'\'s profile pic'">
     
                                 <div class="w-100">
@@ -47,8 +48,8 @@
                                     </div>
         
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <p class="text-lighter">ultimo messaggio</p>
-                                        <i class="fa-solid fa-angle-down text-lighter"></i>
+                                        <p class="text-lighter">{{contact.messages[contact.messages.length-1].status == 'received' ? contact.messages[contact.messages.length-1].message : 'Tu: '+contact.messages[contact.messages.length-1].message}}</p>
+                                        <i class="fa-solid fa-angle-down text-lighter"></i> <!-- TODO chevron menu -->
                                     </div>
                                 </div>
                             </div>
@@ -61,11 +62,11 @@
             </div>
 
             <div id="chat">
-                <div class="header"></div>
+                <div class="header"></div> <!-- TODO chat header -->
 
-                <div class="content"></div>
+                <div class="content"></div> <!-- TODO chat content -->
 
-                <div class="footer"></div>
+                <div class="footer"></div> <!-- TODO chat footer with emojis-->
             </div>
         </div>
     </div>
