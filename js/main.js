@@ -188,7 +188,7 @@ createApp({
                 }
             ],
             notificationAlert: true,
-            focusedContactId: null,
+            focusedContactId: 1001,
         }
     },
 
@@ -277,6 +277,18 @@ createApp({
          */
         hoverContact(contact) {
             contact.select = !contact.select;
+        },
+
+        hasTriangle(messages, i) {
+            if (
+                messages[i-1] &&
+                messages[i-1].status != 
+                messages[i].status ||
+                messages[i-1] == null
+                ) {
+                    return true;
+            }
+            return false;
         },
 
         /**
