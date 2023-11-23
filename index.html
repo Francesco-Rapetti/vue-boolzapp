@@ -13,6 +13,7 @@
 </head>
 <body>
     <!-- TODO darkmode -->
+    <!-- TODO comments -->
     <div id="app">
         <div class="background-head w-100"></div>
         <div id="tableau" class="position-absolute m-auto d-flex overflow-hidden">
@@ -21,7 +22,15 @@
 
                 <div class="header"></div> <!-- TODO icons -->
 
-                <div id="search-container"></div> <!-- TODO search bar -->
+                <div id="search-container" class="d-flex align-items-center ps-12">
+                    <div id="search-box" class="d-flex">
+                        <div class="w-66-4px text-center align-self-center pe-3"><i class="fa-solid fa-magnifying-glass text-lighter"></i></div>
+                        <input class="w-75" type="text" placeholder="Cerca o inizia una nuova chat">
+                    </div>
+                    <div class="mx-8 w-26px text-center">
+                        <i class="fa-solid fa-arrow-down-wide-short text-lighter cursor-pointer"></i>
+                    </div>
+                </div> 
 
                 <div v-if="notificationAlert" id="notification" class="d-flex align-items-center p-3">
                     <div id="notification-icon" class="me-3">

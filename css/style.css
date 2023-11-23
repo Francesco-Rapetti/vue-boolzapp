@@ -9,12 +9,27 @@
 
 .fs-12 { font-size: 12px; }
 .fs-16 { font-size: 16px; }
+.ps-12 { padding-left: 12px; }
+.ps-65 { padding-left: 65px; }
+.mx-8 { margin-left: 8px; margin-right: 8px; }
+.w-26px { width: 26px; }
+.w-50px { width: 50px; }
+.w-66-4px { width: 66.4px; }
 .cursor-pointer { cursor: pointer; }
 .text-lighter { color: #667781!important; }
 
 body {
     background-color: #dbdddd!important;
     height: 100vh;
+}
+
+input {
+    border: none;
+    background-color: transparent;
+}
+
+input:focus {
+    outline: none;
 }
 
 .background-head {
@@ -67,6 +82,13 @@ body {
     background-color: white;
     width: 100%;
     height: 49px;
+}
+
+#search-box {
+    width: calc(100% - 42px);
+    height: 35px;
+    background-color: #f0f2f5;
+    border-radius: 5px;
 }
 
 #notification {
