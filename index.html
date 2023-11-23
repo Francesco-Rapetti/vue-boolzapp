@@ -84,7 +84,24 @@
             </div>
 
             <div id="chat">
-                <div class="header"></div> <!-- TODO chat header -->
+                <div class="header d-flex">
+                    <div v-if="focusedContactId" class="w-40px overflow-hidden rounded-circle me-3">
+                        <img class="w-100" :src="contacts.filter(contact => contact.id == focusedContactId)[0].avatar" alt="">
+                    </div>
+
+                    <div v-if="focusedContactId" id="chat-info" class="d-flex flex-column justify-content-center">
+                        <div id="chat-name" :class="{'writing': contacts.filter(contact => contact.id == focusedContactId)[0].isWriting}" class="fs-16 position-relative">{{contacts.filter(contact => contact.id == focusedContactId)[0].name}}</div>
+                        <div id="chat-status" :class="{'writing': contacts.filter(contact => contact.id == focusedContactId)[0].isWriting}" class="text-lighter fs-13">Sta scrivendo...</div>
+                    </div>
+                    <!-- "Sta scrivendo..." toggle debugger button -->
+                    <!-- <button class="btn bg-warning" @click="contacts.filter(contact => contact.id == focusedContactId)[0].isWriting = !contacts.filter(contact => contact.id == focusedContactId)[0].isWriting"><i class="fa-solid fa-bug text-lighter"></i></button> -->
+
+                    <div class="d-flex align-items-center">
+                        <i class="fa-solid fa-video text-lighter fs-5 px-3 cursor-pointer"></i>
+                        <i class="fa-solid fa-magnifying-glass text-lighter fs-5 px-3 cursor-pointer"></i>
+                        <i class="fa-solid fa-ellipsis-vertical text-lighter fs-5 px-3 cursor-pointer"></i>
+                    </div>
+                </div>
 
                 <div class="content">
                     <div v-if="focusedContactId" v-for="(message, i) in contacts.filter(contact => contact.id == focusedContactId)[0].messages" class="conversation d-flex flex-column px-5">

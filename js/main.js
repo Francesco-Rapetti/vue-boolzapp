@@ -10,6 +10,7 @@ createApp({
                     visible: true,
                     select: false,
                     id: 1000,
+                    isWriting: false,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -34,6 +35,7 @@ createApp({
                     visible: true,
                     select: false,
                     id: 1001,
+                    isWriting: false,
                     messages: [
                         {
                             date: '20/03/2020 16:30:00',
@@ -63,6 +65,7 @@ createApp({
                     visible: true,
                     select: false,
                     id: 1002,
+                    isWriting: false,
                     messages: [
                         {
                             date: '28/03/2020 10:10:40',
@@ -87,6 +90,7 @@ createApp({
                     visible: true,
                     select: false,
                     id: 1003,
+                    isWriting: false,
                     messages: [
                         {
                             date: '10/01/2023 15:30:55',
@@ -106,6 +110,7 @@ createApp({
                     visible: true,
                     select: false,
                     id: 1004,
+                    isWriting: false,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -125,6 +130,7 @@ createApp({
                     visible: true,
                     select: false,
                     id: 1005,
+                    isWriting: false,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -149,6 +155,7 @@ createApp({
                     visible: true,
                     select: false,
                     id: 1006,
+                    isWriting: false,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -168,6 +175,7 @@ createApp({
                     visible: true,
                     select: false,
                     id: 1007,
+                    isWriting: false,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -279,14 +287,17 @@ createApp({
             contact.select = !contact.select;
         },
 
+        /**
+         * Checks if a triangle needs to be drawn.
+         * 
+         * @param {Array} messages - The list of messages.
+         * @param {number} i - The index of the current message in the list.
+         * @returns {boolean} - True if a triangle needs to be drawn, false otherwise.
+         */
         hasTriangle(messages, i) {
-            if (
-                messages[i-1] &&
-                messages[i-1].status != 
-                messages[i].status ||
-                messages[i-1] == null
-                ) {
-                    return true;
+            // Check if the previous message exists and has a different status than the current message
+            if (messages[i-1] && messages[i-1].status != messages[i].status || messages[i-1] == null) {
+                return true;
             }
             return false;
         },
