@@ -105,7 +105,7 @@
 
                 <div class="content">
                     <div v-if="focusedContactId" v-for="(message, i) in contacts.filter(contact => contact.id == focusedContactId)[0].messages" class="conversation d-flex flex-column px-5">
-                        <div v-if="moreThanADay(contacts.filter(contact => contact.id == focusedContactId)[0].messages, i)" class="bubble bubble-date bg-white px-3 py-2 align-self-center text-lighter">
+                        <div v-if="moreThanADay(contacts.filter(contact => contact.id == focusedContactId)[0].messages, i)" class="bubble bubble-date bg-white px-3 py-2 align-self-center text-lighter fs-13">
                             {{contactDate(message.date).toUpperCase()}}
                         </div>
 
@@ -124,7 +124,18 @@
                     </div>
                 </div>
 
-                <div class="footer"></div> <!-- TODO chat footer with emojis-->
+                <div class="footer d-flex align-items-center">
+                    <div class="w-26px d-flex align-items-center justify-content-center me-3 cursor-pointer">
+                        <i class="fa-solid fa-plus fs-4 text-lighter cursor-pointer"></i>
+                    </div>
+                    <div id="input-box" class="d-flex bg-white">
+                        <div class="text-center align-self-center mx-3 cursor-pointer d-flex align-items-center"><i class="fa-regular fa-face-grin fs-3 text-secondary"></i></div>
+                        <input class="w-75 fs-16" type="text" placeholder="Scrivi un messaggio">
+                    </div>
+                    <div class="w-26px d-flex align-items-center justify-content-center ms-3 cursor-pointer">
+                        <i class="fa-solid fa-microphone fs-4 text-lighter cursor-pointer"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
