@@ -13,6 +13,7 @@
 .ps-65 { padding-left: 65px; }
 .mx-8 { margin-left: 8px; margin-right: 8px; }
 .w-26px { width: 26px; }
+.w-40px { width: 40px; }
 .w-50px { width: 50px; }
 .w-66-4px { width: 66.4px; }
 .cursor-pointer { cursor: pointer; }
@@ -64,6 +65,19 @@ input:focus {
     background-color: #f0f2f5;
     height: 59px;
     width: 100%;
+}
+
+#side-menu .header {
+    border-right: 1px solid #e6e6e6;
+    padding: 10px 16px;
+}
+
+#avatar {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .footer {
