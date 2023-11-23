@@ -9,6 +9,7 @@ createApp({
                     avatar: './img/avatar_1.jpg',
                     visible: true,
                     select: false,
+                    id: 1000,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -32,6 +33,7 @@ createApp({
                     avatar: './img/avatar_2.jpg',
                     visible: true,
                     select: false,
+                    id: 1001,
                     messages: [
                         {
                             date: '20/03/2020 16:30:00',
@@ -47,6 +49,11 @@ createApp({
                             date: '23/11/2023 16:35:00',
                             message: 'Mi piacerebbe ma devo andare a fare la spesa.',
                             status: 'sent'
+                        },
+                        {
+                            date: '23/11/2023 16:35:00',
+                            message: 'Mi piacerebbe ma devo andare a fare la spesa.',
+                            status: 'sent'
                         }
                     ],
                 },
@@ -55,6 +62,7 @@ createApp({
                     avatar: './img/avatar_3.jpg',
                     visible: true,
                     select: false,
+                    id: 1002,
                     messages: [
                         {
                             date: '28/03/2020 10:10:40',
@@ -78,6 +86,7 @@ createApp({
                     avatar: './img/avatar_4.jpg',
                     visible: true,
                     select: false,
+                    id: 1003,
                     messages: [
                         {
                             date: '10/01/2023 15:30:55',
@@ -96,6 +105,7 @@ createApp({
                     avatar: './img/avatar_5.jpg',
                     visible: true,
                     select: false,
+                    id: 1004,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -114,6 +124,7 @@ createApp({
                     avatar: './img/avatar_6.jpg',
                     visible: true,
                     select: false,
+                    id: 1005,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -137,6 +148,7 @@ createApp({
                     avatar: './img/avatar_7.jpg',
                     visible: true,
                     select: false,
+                    id: 1006,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -155,6 +167,7 @@ createApp({
                     avatar: './img/avatar_8.jpg',
                     visible: true,
                     select: false,
+                    id: 1007,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -175,6 +188,7 @@ createApp({
                 }
             ],
             notificationAlert: true,
+            focusedContactId: null,
         }
     },
 
@@ -225,8 +239,6 @@ createApp({
                         }
                 }
             }
-        
-
             // Print the message date for debugging purposes
             // console.log(messageDate);
 
@@ -234,6 +246,35 @@ createApp({
             return messageDate;
         },
 
+        /**
+         * Checks if the given message is from a different day than the previous message.
+         * @param {Array} messages - The array of messages.
+         * @param {number} i - The index of the current message.
+         * @returns {boolean} - True if the message is from a different day, false otherwise.
+         */
+        moreThanADay(messages, i) {
+            // Get the date of the current message
+            const date = messages[i].date.substring(0, 10);
+
+            // Check if there is a previous message
+            if (i - 1 >= 0) {
+                // Get the date of the previous message
+                const previousDate = messages[i - 1].date.substring(0, 10);
+
+                // Compare the dates
+                if (date === previousDate) {
+                    return false; // Same day, return false
+                }
+            }
+
+            return true; // Different day, return true
+        },
+
+        /**
+         * Toggles the select property of the given contact.
+         *
+         * @param {Object} contact - The contact object.
+         */
         hoverContact(contact) {
             contact.select = !contact.select;
         },
@@ -248,7 +289,7 @@ createApp({
                 const contacts = document.querySelector('#contacts');
                 const notificationAlert = document.querySelector('#notification');
 
-                // Get the height of the notification alert
+                // Get the current height of the notification alert
                 const notificationRect = notificationAlert.getBoundingClientRect();
 
                 // Calculate the new height of the contacts element
@@ -268,7 +309,7 @@ createApp({
     mounted() {
         if (this.notificationAlert) {
             // Set the height of the side content based on notification div height change (overkill workaround, try to find easyer solution)
-            const resizeObserver = new ResizeObserver(() => this.setSideContentHeight());
+            const resizeObserver = new ResizeObserver(this.setSideContentHeight);
             resizeObserver.observe(document.getElementById('notification'));
         }
     }

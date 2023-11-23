@@ -158,6 +158,12 @@ input:focus {
     border-radius: 16px;
 }
 
+.focus {
+    background-color: #f0f2f5;
+    height: 100%;
+    border-radius: 16px;
+}
+
 .img-container {
     /* overflow: hidden; */
     width: 50px!important;
