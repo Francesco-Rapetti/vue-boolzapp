@@ -188,12 +188,12 @@
                 <div class="footer d-flex align-items-center">
                 
                     <!-- Add button -->
-                    <div class="w-26px d-flex align-items-center justify-content-center me-3 cursor-pointer">
+                    <div v-if="focusedContactId" class="w-26px d-flex align-items-center justify-content-center me-3 cursor-pointer">
                         <i class="fa-solid fa-plus fs-4 text-lighter cursor-pointer"></i>
                     </div>
                 
                     <!-- Input box -->
-                    <div id="input-box" class="d-flex bg-white">
+                    <div v-if="focusedContactId" id="input-box" class="d-flex bg-white">
                 
                         <!-- Emoji button -->
                         <div class="text-center align-self-center mx-3 cursor-pointer d-flex align-items-center">
@@ -209,7 +209,7 @@
                     </div>
                 
                     <!-- Microphone button -->
-                    <div class="w-26px d-flex align-items-center justify-content-center ms-3 cursor-pointer">
+                    <div v-if="focusedContactId" class="w-26px d-flex align-items-center justify-content-center ms-3 cursor-pointer">
                         <i class="fa-solid fa-microphone fs-4 text-lighter cursor-pointer"></i>
                     </div>
                 

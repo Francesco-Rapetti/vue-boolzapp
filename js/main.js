@@ -204,7 +204,7 @@ createApp({
                 }
             ],
             notificationAlert: true,
-            focusedContactId: 1001,
+            focusedContactId: null,
         }
     },
 
