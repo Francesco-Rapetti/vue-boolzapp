@@ -1,5 +1,6 @@
 /* TODO media queries */
 
+/* Global styles */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,42 +8,59 @@
     font-size: 14.2px;
 }
 
+/* Font sizes */
 .fs-12 { font-size: 12px; }
 .fs-13 { font-size: 13px; }
 .fs-16 { font-size: 16px; }
+
+/* Padding sizes */
 .ps-12 { padding-left: 12px; }
 .ps-65 { padding-left: 65px; }
+
+/* Margin sizes */
 .mx-8 { margin-left: 8px; margin-right: 8px; }
+
+/* Width sizes */
 .w-26px { width: 26px; }
 .w-40px { width: 40px; }
 .w-50px { width: 50px; }
 .w-66-4px { width: 66.4px; }
+
+/* Cursor style */
 .cursor-pointer { cursor: pointer; }
+
+/* Text color */
 .text-lighter { color: #667781!important; }
+
+/* Positioning */
 .left-0 { left: 0; }
 .right-0 { right: 0; }
 
+/* Body styles */
 body {
     background-color: #dbdddd!important;
     height: 100vh;
 }
 
+/* Input styles */
 input {
     border: none;
     background-color: transparent;
 }
 
+/* Input focus styles */
 input:focus {
     outline: none;
 }
 
+/* Background head styles */
 .background-head {
     background-color: #00a884;
     height: 127px;
 }
 
+/* Tableau styles */
 #tableau {
-    background-color: blue;
     height: calc(100vh - 38px);
     max-width: 1600px;
     top: 19px;
@@ -51,6 +69,7 @@ input:focus {
     z-index: 0;
 }
 
+/* Styles for the side menu */
 #side-menu {
     max-width: 480px;
     min-width: 30%;
@@ -58,41 +77,50 @@ input:focus {
     background-color: white;
 }
 
+/* Styles for the chat area */
 #chat {
     max-width: calc(100% - 480px);
     min-width: 70%;
-    background-color: red;
 }
 
+/* Styles for the header in the chat area */
 #chat .header {
     padding: 10px 16px;
 }
 
+/* Styles for the chat info */
 #chat-info {
     width: calc(100% - 182px);
 }
 
+/* Styles for the chat name and status */
 #chat-name, #chat-status {
     transition: all 0.3s ease-in-out;
 }
 
+/* Styles for the chat status */
 #chat-status {
     opacity: 0;
 }
 
+/* Styles for the chat name */
 #chat-name {
     top: .75rem;
 }
 
+/* Styles for the chat name when writing */
 #chat-name.writing {
     top: 0;
 }
 
+/* Styles for the chat status when writing */
 #chat-status.writing {
     opacity: 1;
 }
 
+/* Styles for the chat bubbles */
 .bubble {
+    max-width: 70%;
     padding: 6px 7px 8px 9px;
     border-radius: 5px;
     -webkit-box-shadow: 0px 2px 0px 0px #0000001e;
@@ -102,35 +130,42 @@ input:focus {
     margin-bottom: 2px;
 }
 
+/* Styles for the bubble date */
 .bubble.bubble-date {
     align-self: center;
     margin: 14px 0;
 }
 
+/* Styles for the sent bubbles */
 .bubble.sent {
     background-color: #dafdd6;
     align-self: flex-end;
 }
 
+/* Styles for the received bubbles */
 .bubble.received {
     background-color: #ffffff;
     align-self: flex-start;
 }
 
+/* Styles for the first sent bubble */
 .bubble.sent.first {
     border-top-right-radius: 0;
 }
 
+/* Styles for the first received bubble */
 .bubble.received.first {
     border-top-left-radius: 0;
 }
 
+/* Styles for the bubble timestamp */
 .bubble-time {
     position: relative;
     padding-left: 8px;
     bottom: -8px;
 }
 
+/* Styles for the triangle in the chat bubbles */
 .bubble .triangle {
     width: 0;
     height: 0;
@@ -145,6 +180,7 @@ input:focus {
     border-top: 8px solid transparent!important;
 }
 
+/* Styles for the sent bubble and its triangle */
 .bubble.sent .triangle {
     border-color: #dafdd6;
     transform: rotate(-45deg);
@@ -152,6 +188,7 @@ input:focus {
     top: -8px;
 } 
 
+/* Styles for the received bubble and its triangle */
 .bubble.received .triangle {
     border-color: white;
     transform: rotate(45deg);
@@ -160,17 +197,20 @@ input:focus {
     top: -8px;
 } 
 
+/* Styles for the header */
 .header {
     background-color: #f0f2f5;
     height: 59px;
     width: 100%;
 }
 
+/* Styles for the header in the side menu */
 #side-menu .header {
     border-right: 1px solid #e6e6e6;
     padding: 10px 16px;
 }
 
+/* Styles for the avatar */
 #avatar {
     width: 40px;
     height: 40px;
@@ -179,6 +219,7 @@ input:focus {
     cursor: pointer;
 }
 
+/* Styles for the footer */
 .footer {
     background-color: #f0f2f5;
     width: 100%;
@@ -186,18 +227,22 @@ input:focus {
     padding: 5px 16px;
 }
 
+/* Styles for the content */
 .content {
     background-image: url(../img/mine.jpg);
     height: calc(100% - 59px - 63.33px);
     overflow: auto;
+    padding-bottom: 16px;
 }
 
+/* Styles for the search container */
 #search-container {
     background-color: white;
     width: 100%;
     height: 49px;
 }
 
+/* Styles for the search box */
 #search-box {
     width: 100%;
     height: 35px;
@@ -205,6 +250,7 @@ input:focus {
     border-radius: 5px;
 }
 
+/* Styles for the input box */
 #input-box {
     width: 100%;
     height: 45px;
@@ -212,6 +258,7 @@ input:focus {
     border-radius: 5px;
 }
 
+/* Styles for the notification */
 #notification {
     background-color: #56bde8;
     display: flex;
@@ -219,6 +266,7 @@ input:focus {
     justify-content: space-between;
 }
 
+/* Styles for the notification icon */
 #notification-icon {
     display: flex;
     justify-content: center;
@@ -232,14 +280,17 @@ input:focus {
     font-size: 1.2rem;
 }
 
+/* Font size for chevron right icon */
 .fa-chevron-right {
     font-size: 12px;
 }
 
+/* Minimum height for the contacts section */
 #contacts {
     min-height: 72px;
 }
 
+/* Styling for each contact row */
 .contact-row {
     height: 72px;
     width: 100%;
@@ -247,11 +298,13 @@ input:focus {
     cursor: pointer;
 }
 
+/* Styling for the angle down icon on hover */
 .contact-row:hover .fa-angle-down {
     opacity: 1;
     right: 0;
 }
 
+/* Styling for the angle down icon */
 .fa-angle-down {
     opacity: 0;
     transition: all 0.25s;
@@ -259,6 +312,7 @@ input:focus {
     right: -5px;
 }
 
+/* Styling for the angle down icon within a bubble */
 .bubble .fa-angle-down {
     opacity: 0;
     position: absolute;
@@ -269,14 +323,17 @@ input:focus {
     border-radius: 50%;
 }
 
+/* Styling for the green angle down icon within a bubble */
 .bubble .fa-angle-down.green {
     background: #dafdd6e0;
 }
 
+/* Styling for the white angle down icon within a bubble */
 .bubble .fa-angle-down.white {
     background: rgba(255, 255, 255, 0.8);
 }
 
+/* Styling for the angle down icon on hover within a bubble */
 .bubble:hover .fa-angle-down {
     opacity: 1;
     right: 0px;
@@ -284,29 +341,34 @@ input:focus {
     cursor: pointer;
 }
 
+/* Styling for the select element */
 .select {
     background-color: #f5f6f6;
     height: 100%;
     border-radius: 16px;
 }
 
+/* Styling for the focused select element */
 .focus {
     background-color: #f0f2f5;
     height: 100%;
     border-radius: 16px;
 }
 
+/* Styling for the image container */
 .img-container {
     /* overflow: hidden; */
     width: 50px!important;
 }
 
+/* Styling for the avatar image */
 img.avatar {
     border-radius: 50%;
     width: 50px;
     height: 50px;
 }
 
+/* Styling for the horizontal rule */
 hr {
     width: calc(100% - 84px);
     margin: 0!important;
@@ -315,8 +377,12 @@ hr {
     margin-right: 8px!important;
 }
 
-p { margin: 0!important; }
+/* Styling for paragraphs */
+p { 
+    margin: 0!important; 
+}
 
+/* Styling for anchor tags */
 a { 
     text-decoration: none!important;
     color: black!important; 

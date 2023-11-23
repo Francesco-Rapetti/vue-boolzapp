@@ -3,72 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Set the title of the page -->
     <title>Boolzapp</title>
+    <!-- Set the icon for the page -->
     <link rel="icon" href="https://static-00.iconduck.com/assets.00/whatsapp-icon-2040x2048-8b5th74o.png">
+    <!-- Include the custom CSS file -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Include the Font Awesome CSS file -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Include the Bootstrap CSS file -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <!-- Include the Vue.js JavaScript file -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
     <!-- TODO darkmode -->
-    <!-- TODO comments -->
     <div id="app">
-        <div class="background-head w-100"></div>
-        <div id="tableau" class="position-absolute m-auto d-flex overflow-hidden">
+       <div class="background-head w-100"></div>
+       
+       <!-- Main container -->
+       <div id="tableau" class="position-absolute m-auto d-flex overflow-hidden">
+       
+           <!-- Side menu -->
+           <div id="side-menu">
+       
+               <!-- Header -->
+               <div class="header d-flex justify-content-between align-items-center">
+       
+                   <!-- User information -->
+                   <div class="d-flex align-items-center cursor-pointer">
+                       <div id="avatar">
+                           <img class="w-100" src="img/avatar_io.jpg" alt="avatar">
+                       </div>
+                       <p class="fs-16 ms-3">Sofia</p>
+                   </div>
+       
+                   <!-- Icons -->
+                   <div id="icons" class="d-flex">
+                       <div class="w-40px text-center"><i class="fa-solid fa-user-group fs-5 text-lighter cursor-pointer"></i></div>
+                       <div class="w-40px text-center"><i class="fa-solid fa-comments fs-5 text-lighter cursor-pointer"></i></div>
+                       <div class="w-40px text-center"><i class="fa-solid fa-ellipsis-vertical fs-5 text-lighter cursor-pointer"></i></div>
+                   </div>
+               </div>
 
-            <div id="side-menu">
-
-                <div class="header d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center cursor-pointer">
-                        <div id="avatar">
-                            <img class="w-100" src="img/avatar_io.jpg" alt="avatar">
-                        </div>
-                        <p class="fs-16 ms-3">Sofia</p>
-                    </div>
-
-                    <div id="icons" class="d-flex">
-                        <div class="w-40px text-center"><i class="fa-solid fa-user-group fs-5 text-lighter cursor-pointer"></i></div>
-                        <div class="w-40px text-center"><i class="fa-solid fa-comments fs-5 text-lighter cursor-pointer"></i></div>
-                        <div class="w-40px text-center"><i class="fa-solid fa-ellipsis-vertical fs-5 text-lighter cursor-pointer"></i></div>
-                    </div>
-                </div>
-
+                <!-- Search Container -->
                 <div id="search-container" class="d-flex align-items-center ps-12">
+                    <!-- Search Box -->
                     <div id="search-box" class="d-flex">
+                        <!-- Search Icon -->
                         <div class="w-66-4px text-center align-self-center pe-3"><i class="fa-solid fa-magnifying-glass text-lighter"></i></div>
+                        <!-- Search Input -->
                         <input class="w-75" type="text" placeholder="Cerca o inizia una nuova chat">
                     </div>
+                    <!-- Filter Icon -->
                     <div class="mx-8 w-26px text-center">
                         <i class="fa-solid fa-arrow-down-wide-short text-lighter cursor-pointer"></i>
                     </div>
                 </div> 
-
+                
+                <!-- Notification Container -->
                 <div v-if="notificationAlert" id="notification" class="d-flex align-items-center p-3">
+                    <!-- Notification Icon -->
                     <div id="notification-icon" class="me-3">
                         <i class="fa-regular fa-bell-slash fs-4"></i>
                     </div>
                     <div>
+                        <!-- Notification Title -->
                         <p class="fs-16">Attiva notifiche</p>
+                        <!-- Notification Description -->
                         <p>Ricevi notifiche relative ai nuovi messaggi sul computer.</p>
+                        <!-- Notification Activation Link -->
                         <a href="#" @click="notificationAlert = false">Attiva notifiche desktop <i class="fa-solid fa-chevron-right"></i></a>
                     </div>
+                    <!-- Close Icon -->
                     <i class="fa-solid fa-xmark text-white fs-4 ms-3 cursor-pointer" @click="notificationAlert = false"></i>
                 </div>
     
+                <!-- Container for the list of contacts -->
                 <div id="contacts" class="overflow-auto">
+                    <!-- Loop through each contact -->
                     <div v-for="contact in contacts" v-show="contact.visible">
+                        <!-- Contact row -->
                         <div class="contact-row d-flex align-items-center" @mouseenter="hoverContact(contact)" @mouseleave="hoverContact(contact)" @click="focusedContactId = contact.id">
+                            <!-- Contact details -->
                             <div :class="{select: focusedContactId == contact.id ? false : contact.select, focus: focusedContactId == contact.id}" class="d-flex align-items-center w-100 pe-3">
                                 <img class="avatar mx-3" :src="contact.avatar" :alt="contact.name+'\'s profile pic'">
-    
+                
                                 <div class="w-100">
+                                    <!-- Contact name and last message time -->
                                     <div class="d-flex justify-content-between align-items-center w-100">
                                         <p class="fs-5">{{contact.name}}</p>
-                                        <p class="text-lighter fs-12">{{contactDate(contact.messages[contact.messages.length-1].date)}}</p>
+                                        <p class="text-lighter fs-12">{{
+                                            contactDate(contact.messages[contact.messages.length-1].date) == 'Oggi' ?
+                                            contact.messages[contact.messages.length-1].date.substring(11, 16) :
+                                            contactDate(contact.messages[contact.messages.length-1].date)
+                                        }}</p>
                                     </div>
-        
+                
+                                    <!-- Last message preview -->
                                     <div class="d-flex justify-content-between align-items-center">
                                         <p class="text-lighter">
                                             {{
@@ -83,26 +115,35 @@
                                 </div>
                             </div>
                         </div>
-                        
+                
                         <div class="d-flex align-items-center justify-content-end"><hr></div>
                     </div>
                 </div>
                 
             </div>
 
+            <!-- Chat -->
             <div id="chat">
+                <!-- Header -->
                 <div class="header d-flex">
+                    <!-- Avatar -->
                     <div v-if="focusedContactId" class="w-40px overflow-hidden rounded-circle me-3">
                         <img class="w-100" :src="contacts.filter(contact => contact.id == focusedContactId)[0].avatar" alt="">
                     </div>
 
+                    <!-- Chat info -->
                     <div v-if="focusedContactId" id="chat-info" class="d-flex flex-column justify-content-center">
+                        <!-- Chat name -->
                         <div id="chat-name" :class="{'writing': contacts.filter(contact => contact.id == focusedContactId)[0].isWriting}" class="fs-16 position-relative">{{contacts.filter(contact => contact.id == focusedContactId)[0].name}}</div>
+                        <!-- Chat status -->
                         <div id="chat-status" :class="{'writing': contacts.filter(contact => contact.id == focusedContactId)[0].isWriting}" class="text-lighter fs-13">Sta scrivendo...</div>
                     </div>
-                    <!-- "Sta scrivendo..." toggle debugger button -->
+
+                    <!-- "Sta scrivendo..." toggle button (debugger) -->
                     <!-- <button class="btn bg-warning" @click="contacts.filter(contact => contact.id == focusedContactId)[0].isWriting = !contacts.filter(contact => contact.id == focusedContactId)[0].isWriting"><i class="fa-solid fa-bug text-lighter"></i></button> -->
 
+                    
+                    <!-- Icons -->
                     <div class="d-flex align-items-center">
                         <i class="fa-solid fa-video text-lighter fs-5 px-3 cursor-pointer"></i>
                         <i class="fa-solid fa-magnifying-glass text-lighter fs-5 px-3 cursor-pointer"></i>
@@ -110,43 +151,68 @@
                     </div>
                 </div>
 
+                <!-- Content -->
                 <div class="content">
+                    <!-- Loop through the messages of the focused contact -->
                     <div v-if="focusedContactId" v-for="(message, i) in contacts.filter(contact => contact.id == focusedContactId)[0].messages" class="conversation d-flex flex-column px-5">
+                        
+                        <!-- Display the date if it's a new day -->
                         <div v-if="moreThanADay(contacts.filter(contact => contact.id == focusedContactId)[0].messages, i)" class="bubble bubble-date bg-white px-3 py-2 align-self-center text-lighter fs-13">
                             {{contactDate(message.date).toUpperCase()}}
                         </div>
-
+                        
+                        <!-- Display the message bubble -->
                         <div class="bubble d-flex position-relative" :class="{
-                                'sent': message.status == 'sent', 
-                                'received': message.status == 'received', 
-                                'first': hasTriangle(contacts.filter(contact => contact.id == focusedContactId)[0].messages, i)
-                            }">
+                            'sent': message.status == 'sent', 
+                            'received': message.status == 'received', 
+                            'first': hasTriangle(contacts.filter(contact => contact.id == focusedContactId)[0].messages, i)
+                        }">
+                            <!-- Display the message content -->
                             <div class="align-self-center">{{message.message}}</div>
+                            
+                            <!-- Display the message time -->
                             <div class="bubble-time fs-12 text-lighter">{{message.date.substring(11, 16)}}</div>
-                            <div class="overflow-hidden position-absolute w-100 h-100 top-0 bottom-0 left-0 right-0"> <!-- wrap div to manage overflow -->
+                            
+                            <!-- Display the message status icon -->
+                            <div class="overflow-hidden position-absolute w-100 h-100 top-0 bottom-0 left-0 right-0">
                                 <i class="fa-solid fa-angle-down text-lighter" :class="message.status == 'sent' ? 'green' : 'white'"></i>
                             </div>
+                            
+                            <!-- Display the triangle if it's the first message of a contact -->
                             <div v-if="hasTriangle(contacts.filter(contact => contact.id == focusedContactId)[0].messages, i)" class="triangle"></div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Footer -->
                 <div class="footer d-flex align-items-center">
+                
+                    <!-- Add button -->
                     <div class="w-26px d-flex align-items-center justify-content-center me-3 cursor-pointer">
                         <i class="fa-solid fa-plus fs-4 text-lighter cursor-pointer"></i>
                     </div>
+                
+                    <!-- Input box -->
                     <div id="input-box" class="d-flex bg-white">
+                
+                        <!-- Emoji button -->
                         <div class="text-center align-self-center mx-3 cursor-pointer d-flex align-items-center">
                             <i class="fa-regular fa-face-grin fs-3 text-secondary"></i>
                         </div>
+                
+                        <!-- Text input -->
                         <input class="w-75 fs-16" type="text" placeholder="Scrivi un messaggio" 
                             :value="contacts.filter(contact => contact.id == focusedContactId)[0].inputText" 
                             @input="contacts.filter(contact => contact.id == focusedContactId)[0].inputText = $event.target.value" 
                             @keyup.enter="sendMessage(contacts.filter(contact => contact.id == focusedContactId)[0].id)">
+                
                     </div>
+                
+                    <!-- Microphone button -->
                     <div class="w-26px d-flex align-items-center justify-content-center ms-3 cursor-pointer">
                         <i class="fa-solid fa-microphone fs-4 text-lighter cursor-pointer"></i>
                     </div>
+                
                 </div>
             </div>
         </div>
