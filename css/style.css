@@ -304,6 +304,7 @@ input:focus {
     right: 0;
 }
 
+/* Styles for the dropdown menu wrapper of bubbles */
 .bubble .wrapper {
     height: 34px!important;
     width: 34px!important;
@@ -395,4 +396,8 @@ p {
 a { 
     text-decoration: none!important;
     color: black!important; 
+}
+
+.dropdown-item:active {
+    background-color: #f0f2f5!important;
 }
