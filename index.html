@@ -80,15 +80,17 @@
                 </div>
     
                 <!-- Container for the list of contacts -->
-                <div id="contacts" class="overflow-auto">
+                <div v-if="contacts.length > 0" id="contacts" class="overflow-auto">
                     <!-- Loop through each contact -->
-                    <div v-for="contact in contacts" v-show="contact.visible">
+                    <div v-for="(contact, i) in contacts" v-show="contact.visible">
                         <!-- Contact row -->
-                        <div class="contact-row d-flex align-items-center" @mouseenter="hoverContact(contact)" @mouseleave="hoverContact(contact)" @click="focusedContactId = contact.id">
-                            <!-- Contact details -->
-                            <div :class="{select: focusedContactId == contact.id ? false : contact.select, focus: focusedContactId == contact.id}" class="d-flex align-items-center w-100 pe-3">
+                        <div class="contact-row d-flex align-items-center position-relative">
+                            <!-- Event handler div (separated from main container to prevent interference with other click events) -->
+                            <div class="w-100 h-100 position-absolute" @click="focusedContactId = contact.id"></div>
+                            <!-- Contact selection mask -->
+                            <div :class="{select: !(focusedContactId == contact.id), focus: focusedContactId == contact.id}" class="d-flex align-items-center w-100 pe-3">
                                 <img class="avatar mx-3" :src="contact.avatar" :alt="contact.name+'\'s profile pic'">
-                
+                                <!-- Contact information -->
                                 <div class="w-100">
                                     <!-- Contact name and last message time -->
                                     <div class="d-flex justify-content-between align-items-center w-100">
@@ -99,7 +101,6 @@
                                             contactDate(contact.messages[contact.messages.length-1].date)
                                         }}</p>
                                     </div>
-                
                                     <!-- Last message preview -->
                                     <div class="d-flex align-items-center justify-content-between w-100">
                                         <p v-if="contact.messages.length > 0" class="text-lighter">
@@ -110,8 +111,16 @@
                                                     'Tu: '+contact.messages[contact.messages.length-1].message
                                             }}
                                         </p>
+
                                         <div v-if="contact.messages.length == 0" class="w-100"></div>
-                                        <i class="fa-solid fa-angle-down text-lighter"></i> <!-- TODO chevron menu -->
+                                        <!-- Dropdown menu -->
+                                        <div class="dropdown">
+                                            <i class="fa-solid fa-angle-down text-lighter" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item cursor-pointer" @click="console.log(contact)">Contact info</a></li>
+                                                <li><a class="dropdown-item cursor-pointer" @click="deleteContact(contact.id)">Delete chat</a></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -126,29 +135,31 @@
             <!-- Chat -->
             <div id="chat">
                 <!-- Header -->
-                <div class="header d-flex">
-                    <!-- Avatar -->
-                    <div v-if="focusedContactId" class="w-40px overflow-hidden rounded-circle me-3">
-                        <img class="w-100" :src="contacts.filter(contact => contact.id == focusedContactId)[0].avatar" alt="">
-                    </div>
-
-                    <!-- Chat info -->
-                    <div v-if="focusedContactId" id="chat-info" class="d-flex flex-column justify-content-center">
-                        <!-- Chat name -->
-                        <div id="chat-name" :class="{'writing': contacts.filter(contact => contact.id == focusedContactId)[0].isWriting}" class="fs-16 position-relative">{{contacts.filter(contact => contact.id == focusedContactId)[0].name}}</div>
-                        <!-- Chat status -->
-                        <div id="chat-status" :class="{'writing': contacts.filter(contact => contact.id == focusedContactId)[0].isWriting}" class="text-lighter fs-13">Sta scrivendo...</div>
-                    </div>
-
-                    <!-- "Sta scrivendo..." toggle button (debugger) -->
-                    <!-- <button class="btn bg-warning" @click="contacts.filter(contact => contact.id == focusedContactId)[0].isWriting = !contacts.filter(contact => contact.id == focusedContactId)[0].isWriting"><i class="fa-solid fa-bug text-lighter"></i></button> -->
-
-                    
-                    <!-- Icons -->
-                    <div class="d-flex align-items-center">
-                        <i class="fa-solid fa-video text-lighter fs-5 px-3 cursor-pointer"></i>
-                        <i class="fa-solid fa-magnifying-glass text-lighter fs-5 px-3 cursor-pointer"></i>
-                        <i class="fa-solid fa-ellipsis-vertical text-lighter fs-5 px-3 cursor-pointer"></i>
+                <div class="header">
+                    <div v-if="focusedContactId && contacts.length > 0" class="d-flex">
+                        <!-- Avatar -->
+                        <div v-if="focusedContactId" class="w-40px overflow-hidden rounded-circle me-3">
+                            <img class="w-100" :src="contacts.filter(contact => contact.id == focusedContactId)[0].avatar" alt="">
+                        </div>
+    
+                        <!-- Chat info -->
+                        <div v-if="focusedContactId" id="chat-info" class="d-flex flex-column justify-content-center">
+                            <!-- Chat name -->
+                            <div id="chat-name" :class="{'writing': contacts.filter(contact => contact.id == focusedContactId)[0].isWriting}" class="fs-16 position-relative">{{contacts.filter(contact => contact.id == focusedContactId)[0].name}}</div>
+                            <!-- Chat status -->
+                            <div id="chat-status" :class="{'writing': contacts.filter(contact => contact.id == focusedContactId)[0].isWriting}" class="text-lighter fs-13">Sta scrivendo...</div>
+                        </div>
+    
+                        <!-- "Sta scrivendo..." toggle button (debugger) -->
+                        <!-- <button class="btn bg-warning" @click="contacts.filter(contact => contact.id == focusedContactId)[0].isWriting = !contacts.filter(contact => contact.id == focusedContactId)[0].isWriting"><i class="fa-solid fa-bug text-lighter"></i></button> -->
+    
+                        
+                        <!-- Icons -->
+                        <div class="d-flex align-items-center">
+                            <i class="fa-solid fa-video text-lighter fs-5 px-3 cursor-pointer"></i>
+                            <i class="fa-solid fa-magnifying-glass text-lighter fs-5 px-3 cursor-pointer"></i>
+                            <i class="fa-solid fa-ellipsis-vertical text-lighter fs-5 px-3 cursor-pointer"></i>
+                        </div>
                     </div>
                 </div>
 
@@ -179,10 +190,10 @@
                                 <div class="wrapper" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-angle-down text-lighter" :class="message.status == 'sent' ? 'green' : 'white'"></i>
                                 </div>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item cursor-pointer" @click="console.log(message)">Message info</a></li>
-                                        <li><a class="dropdown-item cursor-pointer" @click="deleteMessage(contacts.filter(contact => contact.id == focusedContactId)[0].messages, i)">Delete message</a></li>
-                                    </ul>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item cursor-pointer" @click="console.log(message)">Message info</a></li>
+                                    <li><a class="dropdown-item cursor-pointer" @click="deleteMessage(contacts.filter(contact => contact.id == focusedContactId)[0].messages, i)">Delete message</a></li>
+                                </ul>
                             </div>
                             
                             <!-- Display the triangle if it's the first message of a contact -->

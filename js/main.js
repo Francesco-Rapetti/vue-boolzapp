@@ -8,7 +8,6 @@ createApp({
                     name: 'Michele',
                     avatar: './img/avatar_1.jpg',
                     visible: true,
-                    select: false,
                     id: 1000,
                     isWriting: false,
                     inputText: '',
@@ -34,7 +33,6 @@ createApp({
                     name: 'Fabio',
                     avatar: './img/avatar_2.jpg',
                     visible: true,
-                    select: false,
                     id: 1001,
                     isWriting: false,
                     inputText: '',
@@ -65,7 +63,6 @@ createApp({
                     name: 'Samuele',
                     avatar: './img/avatar_3.jpg',
                     visible: true,
-                    select: false,
                     id: 1002,
                     isWriting: false,
                     inputText: '',
@@ -91,7 +88,6 @@ createApp({
                     name: 'Alessandro B.',
                     avatar: './img/avatar_4.jpg',
                     visible: true,
-                    select: false,
                     id: 1003,
                     isWriting: false,
                     inputText: '',
@@ -112,7 +108,6 @@ createApp({
                     name: 'Alessandro L.',
                     avatar: './img/avatar_5.jpg',
                     visible: true,
-                    select: false,
                     id: 1004,
                     isWriting: false,
                     inputText: '',
@@ -133,7 +128,6 @@ createApp({
                     name: 'Claudia',
                     avatar: './img/avatar_6.jpg',
                     visible: true,
-                    select: false,
                     id: 1005,
                     isWriting: false,
                     inputText: '',
@@ -159,7 +153,6 @@ createApp({
                     name: 'Federico',
                     avatar: './img/avatar_7.jpg',
                     visible: true,
-                    select: false,
                     id: 1006,
                     isWriting: false,
                     inputText: '',
@@ -180,10 +173,9 @@ createApp({
                     name: 'Davide',
                     avatar: './img/avatar_8.jpg',
                     visible: true,
-                    select: false,
                     id: 1007,
                     isWriting: false,
-                    inputText: 'asdasdasd',
+                    inputText: '',
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -291,9 +283,6 @@ createApp({
          *
          * @param {Object} contact - The contact object.
          */
-        hoverContact(contact) {
-            contact.select = !contact.select;
-        },
 
         /**
          * Checks if a triangle needs to be drawn.
@@ -383,6 +372,17 @@ createApp({
          */
         deleteMessage(messages, index) {
             messages.splice(index, 1);
+        },
+
+        /**
+         * Deletes a contact from the list of contacts.
+         * @param {number} id - The ID of the contact to delete.
+         */
+        deleteContact(id) {
+            // Filter out the contact with the given ID
+            this.contacts = this.contacts.filter(contact => contact.id != id);
+            // Reset the focused contact ID
+            this.focusedContactId = null;
         },
 
         /**
