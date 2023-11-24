@@ -197,6 +197,7 @@ createApp({
             ],
             notificationAlert: true,
             focusedContactId: null,
+            searchText: '',
         }
     },
 
@@ -383,6 +384,16 @@ createApp({
             this.contacts = this.contacts.filter(contact => contact.id != id);
             // Reset the focused contact ID
             this.focusedContactId = null;
+        },
+
+        searchContact() {
+            this.contacts.forEach(contact => {
+                if (contact.name.toLowerCase().includes(this.searchText.toLowerCase())) {
+                    contact.visible = true;
+                } else {
+                    contact.visible = false;
+                }
+            });
         },
 
         /**

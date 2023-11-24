@@ -53,7 +53,7 @@
                         <!-- Search Icon -->
                         <div class="w-66-4px text-center align-self-center pe-3"><i class="fa-solid fa-magnifying-glass text-lighter"></i></div>
                         <!-- Search Input -->
-                        <input class="w-75" type="text" placeholder="Cerca o inizia una nuova chat">
+                        <input class="w-75" type="text" placeholder="Cerca o inizia una nuova chat" :value="searchText" @input="searchText = $event.target.value, searchContact()">
                     </div>
                     <!-- Filter Icon -->
                     <div class="mx-8 w-26px text-center">
