@@ -258,6 +258,14 @@ input:focus {
     border-radius: 5px;
 }
 
+/* Styling for the text searched */
+.highlight {
+    background-color: yellow!important;
+    font-size: 18px;
+    margin: 0!important;
+    padding: 0!important;
+}
+
 /* Styles for the notification */
 #notification {
     background-color: #56bde8;

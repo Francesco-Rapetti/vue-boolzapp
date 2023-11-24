@@ -94,7 +94,7 @@
                                 <div class="w-100">
                                     <!-- Contact name and last message time -->
                                     <div class="d-flex justify-content-between align-items-center w-100">
-                                        <p class="fs-5">{{contact.name}}</p>
+                                        <p class="contact-name fs-5">{{contact.name}}</p>
                                         <p v-if="contact.messages.length > 0" class="text-lighter fs-12">{{
                                             contactDate(contact.messages[contact.messages.length-1].date) == 'Oggi' ?
                                             contact.messages[contact.messages.length-1].date.substring(11, 16) :

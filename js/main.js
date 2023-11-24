@@ -386,11 +386,45 @@ createApp({
             this.focusedContactId = null;
         },
 
+        /**
+         * Searches for contacts based on the provided search text.
+         * Updates the visibility of contacts and highlights the search text in contact names.
+         */
         searchContact() {
+            // Get all contact names
+            let names = document.getElementsByClassName('contact-name');
+
+            // Iterate through each contact
             this.contacts.forEach(contact => {
-                if (contact.name.toLowerCase().includes(this.searchText.toLowerCase())) {
+                // If search text is empty reset visibility
+                if (this.searchText == "") {
+                    // Clean all contact names and set visibility to true
+                    Array.from(names).forEach(name => {
+                        // Remove existing highlight tags
+                        name.innerHTML = name.innerHTML.replace(/(<mark class="highlight">|<\/mark>)/gim, '');
+                    })
                     contact.visible = true;
-                } else {
+                }
+                // If contact name includes search text
+                else if (contact.name.toLowerCase().includes(this.searchText.toLowerCase())) {
+                    // Set visibility to true
+                    contact.visible = true;
+                    // Create regex to match search text
+                    const regex = new RegExp(this.searchText, 'gi');
+                    // Iterate through each contact name
+                    Array.from(names).forEach(name => {
+                        console.log(name.innerHTML)
+                        let text = name.innerHTML
+                        // Remove existing highlight tags
+                        text = text.replace(/(<mark class="highlight">|<\/mark>)/gim, '');
+                        // Replace search text with highlighted text
+                        const newText = text.replace(regex, '<mark class="highlight">$&</mark>');
+                        name.innerHTML = newText;
+                    })
+                }
+                // If contact name does not include search text
+                else {
+                    // Set visibility to false
                     contact.visible = false;
                 }
             });
