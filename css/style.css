@@ -352,7 +352,7 @@ input:focus {
 }
 
 /* Styling for the select element */
-.select {
+.contact-row:hover .select {
     background-color: #f5f6f6;
     height: 100%;
     border-radius: 16px;
@@ -382,7 +382,6 @@ img.avatar {
 hr {
     width: calc(100% - 84px);
     margin: 0!important;
-    /* border-top: 4px!important; */
     color: #bababa!important;
     margin-right: 8px!important;
 }
@@ -398,6 +397,7 @@ a {
     color: black!important; 
 }
 
+/* Dropdown item when active */
 .dropdown-item:active {
     background-color: #f0f2f5!important;
 }
